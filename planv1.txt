@@ -1,0 +1,53 @@
+Warframe Planning Website - Version 1
+
+---
+
+### Features to Implement:
+
+1. **Unique Occurrences**:
+   - Track and display limited-time alerts/events.
+
+2. **Rotational Item Tracking**:
+   a) Baro Trader items (rotates every 2 weeks).
+   b) Tenet Melee Items (rotates every 4 days).
+   c) SP Vendor (rotates weekly - track only Umbra Forma offer).
+
+3. **Daily Tasks**:
+   - Gain Simaris Rep:
+     - 15 minutes of scanning on Fortuna for 32,500 reputation.
+     - Highlight that 100,000 rep milestone gets a Companion Weapon Riven worth 59 platinum.
+
+4. **Weekly Tasks**:
+   a) Ironwake Buys.
+   b) Cavia Rep:
+      - Shiny Bird buy for Archon Shard.
+   c) 1999 Calendar:
+      - Offer a mix of Archon Shards, Arcanes, Forma (value-for-time analysis).
+   d) Kahl Mission:
+      - 15-30 minutes for 100-120 rep, 40 rep trades for Archon Intensity/Continuity (20 platinum value).
+   e) Archon Hunt:
+      - 45 minutes for Archon Crystal.
+   f) Use 5 Explores Weekly:
+      - Guide to gather Archon Crystals.
+      - Locations:
+         - Netracell
+         - Deep Archimadea
+         - 199 new thing.
+
+5. **Time-Sensitive Activities**:
+   - **Bounties/Missions**:
+     - Speedy relic cracking and void traces (Void Fissures):
+       - All capture missions.
+       - Regular exterminate Lith/Meso missions.
+   - **Corrupted Holo-Key Farming**:
+     - Railjack Void Storms (Veil Proxima, Pluto - Exterminate Missions).
+   - **Holdfast Bounty**:
+     - Void Angel Missions.
+   - **Kuva & Resource Farming**:
+     - Missions: Void Fissure, Kuva Survival/Disruption/Defense.
+   - **Argon Crystal Farming**:
+     - Void Fissure missions in the Void.
+
+---
+
+End of Plan V1
