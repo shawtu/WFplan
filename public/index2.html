@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warframe Void Missions (Direct Fetch)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h2 {
+      color: #333;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 10px;
+    }
+    .category {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Warframe Void Missions</h1>
+    <div id="missions"></div>
+  </div>
+
+  <script>
+    async function fetchMissions() {
+      try {
+        const response = await fetch('https://api.warframestat.us/pc');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        const container = document.getElementById('missions');
+        container.innerHTML = '';
+
+        const categories = {
+          speedyCracking: 'Speedy Relic Cracking Missions',
+          argonCrystalFarming: 'Argon Crystal Farming Missions',
+          kuvaFarming: 'Kuva Farming Missions (Survival in Kuva Fortress)',
+          lichKeyCracking: 'Lich Key Cracking Missions (Spy in Kuva Fortress)'
+        };
+
+        // Categorize missions
+        const speedyCracking = [];
+        const argonCrystalFarming = [];
+        const kuvaFarming = [];
+        const lichKeyCracking = [];
+
+        data.fissures.forEach((fissure) => {
+          const { missionType, tier, node, isHard } = fissure;
+
+          // Speedy Relic Cracking
+          if (
+            missionType === 'Capture' || 
+            (missionType === 'Exterminate' && !isHard && (tier === 'Lith' || tier === 'Meso'))
+          ) {
+            speedyCracking.push(fissure);
+          }
+
+          // Argon Crystal Farming
+          if (node.includes('Void')) {
+            argonCrystalFarming.push(fissure);
+          }
+
+          // Kuva Farming (Survival in Kuva Fortress)
+          if (node.includes('Kuva Fortress') && missionType === 'Survival') {
+            kuvaFarming.push(fissure);
+          }
+
+          // Cracking Lich Keys (Spy in Kuva Fortress)
+          if (node.includes('Kuva Fortress') && missionType === 'Spy') {
+            lichKeyCracking.push(fissure);
+          }
+        });
+
+        const allCategories = { speedyCracking, argonCrystalFarming, kuvaFarming, lichKeyCracking };
+
+        for (const [key, missions] of Object.entries(allCategories)) {
+          const categoryDiv = document.createElement('div');
+          categoryDiv.className = 'category';
+
+          const title = document.createElement('h2');
+          title.textContent = categories[key];
+          categoryDiv.appendChild(title);
+
+          if (missions.length === 0) {
+            const noMissions = document.createElement('p');
+            noMissions.textContent = 'No missions found for this category.';
+            categoryDiv.appendChild(noMissions);
+          } else {
+            const ul = document.createElement('ul');
+            missions.forEach((mission) => {
+              const li = document.createElement('li');
+              li.textContent = `${mission.missionType} (${mission.tier}) - ${mission.node} [${mission.isHard ? 'Steel Path' : 'Regular'}]`;
+              ul.appendChild(li);
+            });
+            categoryDiv.appendChild(ul);
+          }
+
+          container.appendChild(categoryDiv);
+        }
+      } catch (error) {
+        console.error('Error fetching missions:', error);
+        const container = document.getElementById('missions');
+        container.innerHTML = `<p style="color: red;">Error fetching missions: ${error.message}</p>`;
+      }
+    }
+
+    fetchMissions();
+  </script>
+</body>
+</html>

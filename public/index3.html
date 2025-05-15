@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limited Time Missions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+    h1, h2, h3 {
+      text-align: center;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #444;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    .mission {
+      background: #f9f9f9;
+      margin: 10px 0;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .mission h4 {
+      margin: 0;
+      font-size: 18px;
+      color: #333;
+    }
+    .mission p {
+      margin: 5px 0;
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h2>Limited Time Missions</h2>
+  <div class="container">
+    <h3>Corrupted Holokey Farming</h3>
+    <div id="holokey-missions">
+      <!-- Corrupted Holokey missions will be dynamically inserted here -->
+    </div>
+    <h3>Speedy Relic Cracking Missions</h3>
+    <div id="speedy-cracking">
+      <!-- Speedy Relic Cracking missions will be dynamically inserted here -->
+    </div>
+    <h3>Argon Crystal Farming Missions</h3>
+    <div id="argon-crystal-farming">
+      <!-- Argon Crystal Farming missions will be dynamically inserted here -->
+    </div>
+    <h3>Kuva Farming Missions</h3>
+    <div id="kuva-farming">
+      <!-- Kuva Farming missions will be dynamically inserted here -->
+    </div>
+    <h3>Lich Key Cracking Missions</h3>
+    <div id="lich-key-cracking">
+      <!-- Lich Key Cracking missions will be dynamically inserted here -->
+    </div>
+  </div>
+
+  <script>
+    async function fetchVoidStormMissions() {
+      try {
+        const response = await fetch('https://api.warframestat.us/pc');
+        const data = await response.json();
+
+        // Filter for Railjack Void Storm missions
+        const voidStormMissions = data.fissures.filter((fissure) => fissure.isStorm);
+
+        // Filter for the best missions for Holokey farming
+        const bestHolokeyMissions = voidStormMissions.filter((mission) => {
+          const { missionType, node } = mission;
+          return (
+            (missionType === 'Skirmish' || missionType === 'Extermination') && // Include Skirmish and Extermination
+            (node.includes('Pluto') || node.includes('Veil')) // Use "Veil" and "Pluto"
+          );
+        });
+
+        const container = document.getElementById('holokey-missions');
+        container.innerHTML = ''; // Clear existing content
+
+        if (bestHolokeyMissions.length === 0) {
+          container.innerHTML = '<p>No ideal Corrupted Holokey farming missions available right now.</p>';
+        } else {
+          bestHolokeyMissions.forEach((mission) => {
+            const { missionType, node, tier, eta } = mission;
+            const [location, planet] = node.split(' (');
+            const difficulty = mission.isHard ? 'Steel Path' : 'Regular';
+
+            // Create mission card
+            const missionElement = document.createElement('div');
+            missionElement.classList.add('mission');
+            missionElement.innerHTML = `
+              <h4>${missionType} on ${location.trim()}</h4>
+              <p><strong>Tier:</strong> ${tier}</p>
+              <p><strong>Planet:</strong> ${planet?.replace(')', '').trim()}</p>
+              <p><strong>Difficulty:</strong> ${difficulty}</p>
+              <p><strong>Time Left:</strong> ${eta}</p>
+            `;
+            container.appendChild(missionElement);
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching Void Storm missions:', error);
+        document.getElementById('holokey-missions').innerHTML = '<p>Error fetching Corrupted Holokey missions.</p>';
+      }
+    }
+
+    async function fetchMissions() {
+      try {
+        const response = await fetch('https://api.warframestat.us/pc');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch data: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+
+        const categories = {
+          speedyCracking: 'speedy-cracking',
+          argonCrystalFarming: 'argon-crystal-farming',
+          kuvaFarming: 'kuva-farming',
+          lichKeyCracking: 'lich-key-cracking',
+        };
+
+        // Categorize missions
+        const speedyCracking = [];
+        const argonCrystalFarming = [];
+        const kuvaFarming = [];
+        const lichKeyCracking = [];
+
+        data.fissures.forEach((fissure) => {
+          const { missionType, tier, node, isHard, eta } = fissure;
+          const difficulty = isHard ? 'Steel Path' : 'Regular';
+
+          // Speedy Relic Cracking
+          if (
+            missionType === 'Capture' || 
+            (missionType === 'Exterminate' && !isHard && (tier === 'Lith' || tier === 'Meso'))
+          ) {
+            speedyCracking.push({ ...fissure, difficulty });
+          }
+
+          // Argon Crystal Farming
+          if (node.includes('Void')) {
+            argonCrystalFarming.push({ ...fissure, difficulty });
+          }
+
+          // Kuva Farming (Survival in Kuva Fortress)
+          if (node.includes('Kuva Fortress') && missionType === 'Survival') {
+            kuvaFarming.push({ ...fissure, difficulty });
+          }
+
+          // Cracking Lich Keys (Spy in Kuva Fortress)
+          if (node.includes('Kuva Fortress') && missionType === 'Spy') {
+            lichKeyCracking.push({ ...fissure, difficulty });
+          }
+        });
+
+        const allCategories = { speedyCracking, argonCrystalFarming, kuvaFarming, lichKeyCracking };
+
+        for (const [key, missions] of Object.entries(allCategories)) {
+          const container = document.getElementById(categories[key]);
+          container.innerHTML = ''; // Clear existing content
+
+          if (missions.length === 0) {
+            container.innerHTML = '<p>No missions found for this category.</p>';
+          } else {
+            missions.forEach((mission) => {
+              const { missionType, tier, node, difficulty, eta } = mission;
+              const [location, planet] = node.split(' (');
+
+              // Create mission card
+              const missionElement = document.createElement('div');
+              missionElement.classList.add('mission');
+              missionElement.innerHTML = `
+                <h4>${missionType} on ${location.trim()}</h4>
+                <p><strong>Tier:</strong> ${tier}</p>
+                <p><strong>Planet:</strong> ${planet?.replace(')', '').trim()}</p>
+                <p><strong>Difficulty:</strong> ${difficulty}</p>
+                <p><strong>Time Left:</strong> ${eta}</p>
+              `;
+              container.appendChild(missionElement);
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching missions:', error);
+      }
+    }
+
+    // Fetch both types of missions on page load
+    fetchVoidStormMissions();
+    fetchMissions();
+  </script>
+</body>
+</html>
