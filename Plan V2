@@ -1,0 +1,96 @@
+Warframe Planning Website - Version 1
+
+---
+
+### Features to Implement:
+
+1. Unique Occurrences:
+   Limited-time alerts/events.
+
+2. Rotational Item Tracking:
+   a) Baro Trader items (rotates every 2 weeks).
+   b) Tenet Melee Items (rotates every 4 days) ** no API **
+   c) SP Vendor (rotates weekly? - track only unique items, Umbra Forma offer).
+
+3. Daily Tasks:
+   a) Simaris Rep (Ivara, scan Temple of Profit, Fortuna):
+      - 12 minutes 
+      - 32,500 rep
+      - 100,000 rep = Companion Weapon Riven = 59-69 plat
+   b) 1999 / Hex Rep (3-4 missions 32,500 rep + Coda Lich):
+      - 20-30 minutes 
+      - 50k rep = element swap for coda weapon
+      - Finish getting arcanes
+   c) ZarimanZero/Holdfast Rep:
+      - Turn in Rep Items
+      - Check Void Angel Bounty (rotation every 150 minutes?) - this makes it easy to get 5k rep items.
+      - Finish getting arcanes
+4. Weekly Tasks:
+   a) Ironwake Buys (2 riven, kuva)
+   b) Cavia Rep (Archon Shard from Bird - Shiny option)
+   c) 1999 Calendar (Mix of Archon Shards, Arcanes, Forma)
+   d) Kahl Mission
+      - 15-30 minutes
+      - 100-120 rep
+      - 40 rep = Archon Intensity/Continuity (20 platinum value).
+   e) Archon Hunt (archon shard)
+      - 45 minutes
+   f) Use 5 Explores Weekly (archon shards, arcane melee duplicate):
+      - Netracell (1)
+      - Deep Archimadea (2)
+      - 1999 new thing (2)
+   g) Duviri - check for new Incarns 
+      - ** this might be changing in a month **
+
+5. Time-Sensitive Activities:
+   a) Speedy relic cracking and void traces (Titania, Thermal Sunder subsume):
+      - void fissure
+      - type: capture missions.
+      - type: exterminate && tier: Lith or Meso && isHard:False (not steelpath)
+   b) Corrupted Holo-Key Farming:
+      - Railjack Void Storms
+      - type: skirmish, exterminate
+      - location: Veil or Pluto
+   c) Holdfast Reputation Grind (killing void angels) ** no API **
+      - Holdfast Bounty
+      - location:Zariman Ten Zen
+      - type: capture, rescue, sabotage, exterminate
+      - Bonus Objectve: Kill Void Angel
+   d) Lich Key & Kuva & Leveling Affinity:
+      - Void Fissure
+      - location: Kuva fortress (name?)
+      - tier: requiem
+      - type: survival
+   e) Lich Key + rare mod (plat) 3 min spy mission with Wukong
+      - Void Fissure
+      - location: Kuva fortress (name?)
+      - tier: requiem
+      - type: spy
+   f) Argon Crystal
+      - Void Fissure
+      - location: void
+   g) Eidolon Hunt
+      - Earth night cycle (time left 15min+)
+   h) Void Cascade Plat Farm
+      - Void Fissure
+      - type: void cascade?
+
+6. Content Island Farms (personal todos)
+   a) Mirror Farm (Citrine Content)
+   b) Ascension Farm ( )
+   c) Holdfast Zariman Zero (Void Angels - tied to rep limit)
+   d) Duviri (Pathos Clamps)
+
+Ideas:
+Let filters be per area - so can be customized per person
+
+Tie activities to platinum farms.
+AYA
+rep mods (pet bond mods)
+riven price
+arcane price
+End of Plan V1
+
+Tie activities to goals in general: (completionist, gearing up for an area, story?)
+
+Time expectations
