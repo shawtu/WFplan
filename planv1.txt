@@ -43,7 +43,7 @@ Warframe Planning Website - Version 1
       - ** this might be changing in a month **
 
 5. Time-Sensitive Activities:
-   a) Speedy relic cracking and void traces:
+   a) Speedy relic cracking and void traces (Titania, Thermal Sunder subsume):
       - void fissure
       - type: capture missions.
       - type: exterminate && tier: Lith or Meso && isHard:False (not steelpath)
@@ -69,13 +69,17 @@ Warframe Planning Website - Version 1
    f) Argon Crystal
       - Void Fissure
       - location: void
+   g) Eidolon Hunt
+      - Earth night cycle (time left 15min+)
+   h) Void Cascade Plat Farm
+      - Void Fissure
+      - type: void cascade?
 
 6. Content Island Farms (personal todos)
    a) Mirror Farm (Citrine Content)
    b) Ascension Farm ( )
    c) Holdfast Zariman Zero (Void Angels - tied to rep limit)
    d) Duviri (Pathos Clamps)
-
 
 Ideas:
 Let filters be per area - so can be customized per person
