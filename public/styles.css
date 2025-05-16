@@ -1,0 +1,119 @@
+/* General Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #0f0f0f;
+  color: #e0e0e0;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+header {
+  text-align: center;
+  background-color: #171717;
+  padding: 20px 0;
+}
+
+header h1 {
+  color: #ffcc00;
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+/* Section Styling */
+.collapsible .section-content.hidden {
+  display: none;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between minimize button and title */
+  margin-bottom: 10px;
+}
+
+.section-header h2 {
+  font-size: 0.9rem; /* Matches subheader style */
+  color: #cccccc; /* Light grey for subheaders */
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.minimize-btn {
+  width: 20px;
+  height: 20px;
+  background-color: #292929;
+  color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Special Importance Section */
+.special-importance .section-content {
+  display: flex;
+  flex-wrap: wrap; /* Wrap cards to the next row */
+  gap: 20px; /* Spacing between cards */
+}
+
+/* Cards */
+.card {
+  background-color: #1a1a1a;
+  border: 1px solid #292929;
+  border-radius: 8px;
+  padding: 15px;
+  width: 300px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  position: relative;
+}
+
+.card-header h3 {
+  font-size: 1.125rem; /* 2px larger than paragraph text */
+  color: #ff9900; /* Orange card titles */
+  margin: 0;
+}
+
+.card-content.hidden {
+  display: none;
+}
+
+.card.checked-off {
+  opacity: 0.5; /* Reduce opacity for checked-off tasks */
+}
+
+.check-off {
+  width: 20px;
+  height: 20px;
+  background-color: #555555; /* Medium grey */
+  border: 1px solid #ffffff; /* White outline */
+  border-radius: 4px; /* Rounded corners */
+  position: absolute;
+  top: 0px; 
+  right: 0px; 
+  cursor: pointer;
+  appearance: none; /* Remove default browser styling */
+}
+
+.check-off:checked {
+  background-color: #00cc66; /* Green background when checked */
+  border-color: #00ff99; /* Light green border when checked */
+}
+
+/* Three-Column Layout */
+.three-column-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
