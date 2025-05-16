@@ -51,7 +51,7 @@ Warframe Planning Website - Version 1
       - Railjack Void Storms
       - type: skirmish, exterminate
       - location: Veil or Pluto
-   c) Holdfast Reputation Grind (killing void angels) ** impossible to check with API **
+   c) Holdfast Reputation Grind (killing void angels) ** no API **
       - Holdfast Bounty
       - location:Zariman Ten Zen
       - type: capture, rescue, sabotage, exterminate
