@@ -1,0 +1,42 @@
+# Warframe Bounty Timers and Locations
+
+## Bounties
+
+### Cetus
+- **Location**: Cetus  
+- **Reputation**: Ostron  
+- **Rotation**: A through C  
+- **Timer**: 150 minutes  
+
+### Fortuna
+- **Location**: Orb Vallis (Fortuna)  
+- **Reputation**: Solaris United  
+- **Rotation**: A through C  
+- **Timer**: 150 minutes  
+
+### Necralisk
+- **Location**: Cambion Drift (Necralisk)  
+- **Reputation**: Entrati  
+- **Rotation**: A through C  
+- **Timer**: 150 minutes  
+
+### Zariman
+- **Location**: Zariman Ten Zero (Chrysalith)  
+- **Reputation**: Holdfasts  
+- **Rotation**: None  
+- **Timer**: 150 minutes  
+- **Mission Types**: Exterminate, Mobile Defense, Void Cascade, Void Flood, Void Armageddon  
+
+### Sanctum Anatomica
+- **Location**: Albrecht's Laboratories (Sanctum Anatomica, Deimos)  
+- **Reputation**: Fibonacci  
+- **Rotation**: None  
+- **Timer**: 150 minutes  
+- **Mission Types**: Exterminate, Survival, Alchemy, Mirror Defense, Assassination  
+
+### Höllvania Central Mall
+- **Location**: Höllvania Central Mall  
+- **Reputation**: Höllvania Syndicate  
+- **Rotation**: None  
+- **Timer**: 150 minutes  
+- **Mission Types**: Exterminate, Survival, Hell-Scrub, Legacyte Harvest, Assassination  
