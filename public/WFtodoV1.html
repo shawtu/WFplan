@@ -20,93 +20,30 @@
         <button class="minimize-btn">-</button>
         <h2 class="subheader">SPECIAL IMPORTANCE</h2>
       </div>
-      <div class="section-content">
-        <div class="card collapsible">
-          <div class="card-header">
-            <button class="minimize-btn">-</button>
-            <h3>Limited-Time Alerts</h3>
-            <input type="checkbox" class="check-off" />
-          </div>
-          <div class="card-content">
-            <p>Track and complete limited-time events or alerts before they expire.</p>
-          </div>
-        </div>
-        <div class="card collapsible">
-          <div class="card-header">
-            <button class="minimize-btn">-</button>
-            <h3>Baro Trader</h3>
-            <input type="checkbox" class="check-off" />
-          </div>
-          <div class="card-content">
-            <p>Check Baro Ki'Teer's inventory (rotates every 2 weeks).</p>
-          </div>
-        </div>
-        <div class="card collapsible">
-          <div class="card-header">
-            <button class="minimize-btn">-</button>
-            <h3>Tenet Melee Items</h3>
-            <input type="checkbox" class="check-off" />
-          </div>
-          <div class="card-content">
-            <p>Track Tenet melee item rotations (every 4 days).</p>
-          </div>
-        </div>
-        <div class="card collapsible">
-          <div class="card-header">
-            <button class="minimize-btn">-</button>
-            <h3>SP Vendor - Umbra Forma</h3>
-            <input type="checkbox" class="check-off" />
-          </div>
-          <div class="card-content">
-            <p>Check weekly Umbra Forma offers from the SP Vendor.</p>
-          </div>
-        </div>
-      </div>
+      <div class="section-content" id="special-importance-cards"></div>
     </section>
 
     <!-- Three-Column Layout -->
     <section class="three-column-layout">
       <!-- Column 1: Weekly Tasks -->
-      <div class="column collapsible">
-        <div class="section-header">
-          <button class="minimize-btn">-</button>
-          <h2 class="subheader">WEEKLY TASKS</h2>
-        </div>
-        <div class="section-content">
-          <div class="card collapsible">
-            <div class="card-header">
-              <button class="minimize-btn">-</button>
-              <h3>Ironwake</h3>
-              <input type="checkbox" class="check-off" />
-            </div>
-            <div class="card-content">
-              <p>Buy rivens and other items.</p>
-              <p><strong>Est. Time:</strong> 2 minutes</p>
-            </div>
-          </div>
-        </div>
-      </div>
+<div class="column collapsible">
+  <div class="section-header">
+    <button class="minimize-btn">-</button>
+    <h2 class="subheader">WEEKLY TASKS</h2>
+    <div class="reset-timer" id="weekly-reset-timer"></div>
+  </div>
+  <div class="section-content" id="weekly-tasks-cards"></div>
+</div>
 
-      <!-- Column 2: Daily Tasks -->
-      <div class="column collapsible">
-        <div class="section-header">
-          <button class="minimize-btn">-</button>
-          <h2 class="subheader">DAILY TASKS</h2>
-        </div>
-        <div class="section-content">
-          <div class="card collapsible">
-            <div class="card-header">
-              <button class="minimize-btn">-</button>
-              <h3>Simaris Rep</h3>
-              <input type="checkbox" class="check-off" />
-            </div>
-            <div class="card-content">
-              <p>Spend 15 minutes scanning on Fortuna for 32,500 Simaris reputation.</p>
-              <p><strong>Goal:</strong> Earn 100,000 rep milestone for a Companion Weapon Riven (worth 59 platinum).</p>
-            </div>
-          </div>
-        </div>
-      </div>
+<!-- Column 2: Daily Tasks -->
+<div class="column collapsible">
+  <div class="section-header">
+    <button class="minimize-btn">-</button>
+    <h2 class="subheader">DAILY TASKS</h2>
+    <div class="reset-timer" id="daily-reset-timer"></div>
+  </div>
+  <div class="section-content" id="daily-tasks-cards"></div>
+</div>
 
       <!-- Column 3: Time-Sensitive Activities -->
       <div class="column collapsible">
@@ -114,22 +51,7 @@
           <button class="minimize-btn">-</button>
           <h2 class="subheader">TIME-SENSITIVE ACTIVITIES</h2>
         </div>
-        <div class="section-content">
-          <div class="card collapsible">
-            <div class="card-header">
-              <button class="minimize-btn">-</button>
-              <h3>Bounties/Missions</h3>
-              <input type="checkbox" class="check-off" />
-            </div>
-            <div class="card-content">
-              <p>Speedy relic cracking and void traces:</p>
-              <ul>
-                <li>Capture missions</li>
-                <li>Regular exterminate Lith/Meso missions</li>
-              </ul>
-            </div>
-          </div>
-        </div>
+        <div class="section-content" id="time-sensitive-cards"></div>
       </div>
     </section>
   </main>
@@ -139,5 +61,6 @@
       <p>&copy; 2025 Warframe Planning Dashboard - Version 1</p>
     </div>
   </footer>
-  <script src="scripts.js"></script>
+  <script type="module" src="scripts.js"></script>
 </body>
+</html>

@@ -27,6 +27,7 @@ header h1 {
 }
 
 /* Section Styling */
+
 .collapsible .section-content.hidden {
   display: none;
 }
@@ -43,6 +44,15 @@ header h1 {
   color: #cccccc; /* Light grey for subheaders */
   margin: 0;
   text-transform: uppercase;
+}
+
+/* adding timers */
+
+.reset-timer {
+  font-size: x-small;
+  color: #29e05e;
+  letter-spacing: 1px;
+  min-width: 120px;
 }
 
 .minimize-btn {
@@ -117,3 +127,26 @@ header h1 {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
+
+/* mission card styling */
+
+.mission-card {
+  background: #000000;
+  margin: 10px 0;
+  font-size: smaller;
+  color: #e0e0e0;;        
+  padding: 10px;
+  border-left: 4px solid #888;
+  border-radius: 4px;
+}
+.mission-card h4 {
+  color: #fff;
+  margin: 0 0 5px 0;
+  border-radius: 2px;
+  font-size: 16px;
+}
+.mission-card p {
+ margin: 6px 0;         /* reduce vertical spacing */
+}
+
+
