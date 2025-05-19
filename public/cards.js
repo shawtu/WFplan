@@ -1,5 +1,5 @@
 // Main Card Renderer (handles normal & mission-list cards)
-export function createCard({ task, reward, estTime, missions }) {
+export function createCard({ task, taskInfo, reward, estTime, missions }) {
   return `
     <div class="card collapsible">
       <div class="card-header">
@@ -8,6 +8,7 @@ export function createCard({ task, reward, estTime, missions }) {
         <input type="checkbox" class="check-off" />
       </div>
       <div class="card-content">
+        ${taskInfo ? `<p>${taskInfo}</p>` : ""}
         ${reward ? `<p><strong>Reward:</strong> ${reward}</p>` : ""}
         ${estTime ? `<p><strong>Est. Time:</strong> ${estTime}</p>` : ""}
         ${missions && missions.length
