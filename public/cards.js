@@ -1,11 +1,13 @@
 // Main Card Renderer (handles normal & mission-list cards)
 export function createCard({ task, taskInfo, reward, estTime, missions }) {
+  // Create a unique/sanitized ID for this task
+  const taskId = task.replace(/\W+/g, '_');
   return `
     <div class="card collapsible">
       <div class="card-header">
-        <button class="minimize-btn">-</button>
+        <input type="checkbox" class="check-off" data-task-id="${taskId}" />
         <h3>${task}</h3>
-        <input type="checkbox" class="check-off" />
+        <button class="minimize-btn">-</button>
       </div>
       <div class="card-content">
         ${taskInfo ? `<p>${taskInfo}</p>` : ""}

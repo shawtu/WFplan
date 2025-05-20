@@ -10,5 +10,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderCards(cardData.dailyTasks, "daily-tasks-cards");
   renderCards(cardData.timeSensitive, "time-sensitive-cards");
   setupUIFunctionality();
-  startResetTimers(); // <-- Add this!
+  startResetTimers();
+
 });
