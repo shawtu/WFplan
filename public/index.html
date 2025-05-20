@@ -3,88 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Warframe Void Missions</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 20px;
-      background-color: #f9f9f9;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    h2 {
-      color: #333;
-    }
-    ul {
-      list-style: none;
-      padding: 0;
-    }
-    li {
-      margin-bottom: 10px;
-    }
-    .category {
-      margin-bottom: 20px;
-    }
-  </style>
+  <title>Warframe Planning Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Warframe Void Missions</h1>
-    <div id="missions"></div>
-  </div>
+  <header>
+    <div class="container">
+      <h1>
+        Warframe Planning Dashboard
+        <button id="clear-daily" style="margin-left:12px;">Daily</button>
+        <button id="clear-weekly" style="margin-left:6px;">Weekly</button>
+      </h1>
+    </div>
+  </header>
 
-  <script>
-    async function fetchMissions() {
-      try {
-        const response = await fetch('/api/voidmissions');
-        const data = await response.json();
+  <main class="dashboard container">
+    <!-- Special Importance Section -->
+    <section class="special-importance collapsible">
+      <div class="section-header">
+        <button class="minimize-btn" aria-label="Minimize section">-</button>
+        <h2 class="subheader">SPECIAL IMPORTANCE</h2>
+      </div>
+      <div class="section-content" id="special-importance-cards"></div>
+    </section>
 
-        const container = document.getElementById('missions');
-        container.innerHTML = '';
+    <!-- Three-Column Layout -->
+    <section class="three-column-layout">
+      <!-- Column 1: Weekly Tasks -->
+      <div class="column collapsible">
+        <div class="section-header">
+          <button class="minimize-btn" aria-label="Minimize section">-</button>
+          <h2 class="subheader">WEEKLY TASKS</h2>
+          <div class="reset-timer" id="weekly-reset-timer"></div>
+        </div>
+        <div class="section-content" id="weekly-tasks-cards"></div>
+      </div>
 
-        const categories = {
-          speedyCracking: 'Speedy Relic Cracking Missions',
-          argonCrystalFarming: 'Argon Crystal Farming Missions',
-          kuvaFarming: 'Kuva Farming Missions (Survival in Kuva Fortress)',
-          lichKeyCracking: 'Lich Key Cracking Missions (Spy in Kuva Fortress)'
-        };
+      <!-- Column 2: Daily Tasks -->
+      <div class="column collapsible">
+        <div class="section-header">
+          <button class="minimize-btn" aria-label="Minimize section">-</button>
+          <h2 class="subheader">DAILY TASKS</h2>
+          <div class="reset-timer" id="daily-reset-timer"></div>
+        </div>
+        <div class="section-content" id="daily-tasks-cards"></div>
+      </div>
 
-        for (const [key, missions] of Object.entries(data)) {
-          const categoryDiv = document.createElement('div');
-          categoryDiv.className = 'category';
+      <!-- Column 3: Time-Sensitive Activities -->
+      <div class="column collapsible">
+        <div class="section-header">
+          <button class="minimize-btn" aria-label="Minimize section">-</button>
+          <h2 class="subheader">TIME-SENSITIVE ACTIVITIES</h2>
+        </div>
+        <div class="section-content" id="time-sensitive-cards"></div>
+      </div>
+    </section>
+  </main>
 
-          const title = document.createElement('h2');
-          title.textContent = categories[key];
-          categoryDiv.appendChild(title);
-
-          if (missions.length === 0) {
-            const noMissions = document.createElement('p');
-            noMissions.textContent = 'No missions found for this category.';
-            categoryDiv.appendChild(noMissions);
-          } else {
-            const ul = document.createElement('ul');
-            missions.forEach((mission) => {
-              const li = document.createElement('li');
-              li.textContent = `${mission.missionType} (${mission.tier}) - ${mission.node} [${mission.isHard ? 'Steel Path' : 'Regular'}]`;
-              ul.appendChild(li);
-            });
-            categoryDiv.appendChild(ul);
-          }
-
-          container.appendChild(categoryDiv);
-        }
-      } catch (error) {
-        console.error('Error fetching missions:', error);
-      }
-    }
-
-    fetchMissions();
-  </script>
+  <footer>
+    <div class="container">
+      <p>&copy; 2025 Warframe Planning Dashboard - Version 1</p>
+    </div>
+  </footer>
+  <script type="module" src="scripts.js"></script>
 </body>
 </html>
