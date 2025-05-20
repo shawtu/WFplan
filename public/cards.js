@@ -1,5 +1,8 @@
+import { timerIcon, diamondIcon } from './icons.js';
+import { truncateReward } from './utils.js';
+
 // Main Card Renderer (handles normal & mission-list cards)
-export function createCard({ task, taskInfo, reward, estTime, missions }) {
+export function createCard({ task, taskInfo, reward, estTime, missions, rewardMaxLen = 14 }) {
   // Create a unique/sanitized ID for this task
   const taskId = task.replace(/\W+/g, '_');
   return `
@@ -7,9 +10,23 @@ export function createCard({ task, taskInfo, reward, estTime, missions }) {
       <div class="card-header">
         <input type="checkbox" class="check-off" data-task-id="${taskId}" />
         <h3>${task}</h3>
-        <button class="minimize-btn">-</button>
       </div>
-      <div class="card-content">
+      <div class="card-summary">
+        <div class="card-summary-row">
+          <div class="card-summary-main">
+            <span class="summary-est-time">
+              <span class="icon-timer">${timerIcon}</span>
+              <span class="summary-est-value">${estTime || ""}</span>
+            </span>
+            <span class="summary-reward">
+              <span class="icon-diamond">${diamondIcon}</span>
+              <span class="summary-reward-value">${truncateReward(reward || "", rewardMaxLen)}</span>
+            </span>
+          </div>
+          <button class="minimize-btn" aria-label="Expand details">+</button>
+        </div>
+      </div>
+      <div class="card-content hidden">
         ${taskInfo ? `<p>${taskInfo}</p>` : ""}
         ${reward ? `<p><strong>Reward:</strong> ${reward}</p>` : ""}
         ${estTime ? `<p><strong>Est. Time:</strong> ${estTime}</p>` : ""}

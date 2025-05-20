@@ -1,10 +1,30 @@
-/* General Styles */
+/* ===== CSS VARIABLES ===== */
+:root {
+  --bg-main: #1D2125;
+  --bg-section: #161A1D;
+  --header-title: #B6C2CD;
+  --timer-color: #B6C2CD;
+  --card-title: #FF9900;
+  --reward-color: #b3e6ff;
+  --card-radius: 12px;
+  --card-width: 328px;
+  --card-gap: 12px;
+  --card-padding: 12px;
+  --section-title-font: 'Inter', 'Roboto', sans-serif;
+  --section-title-size: 12px;
+  --section-title-weight: 300;
+  --light-shadow: linear-gradient(0deg, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0.10) 100%),
+                   linear-gradient(90deg, rgba(29,33,37,0.00) 0%, rgba(29,33,37,0.70) 100%),
+                   linear-gradient(90deg, rgba(29,33,37,0.70) 0%, rgba(29,33,37,0.00) 100%),
+                   linear-gradient(180deg, rgba(0,0,0,0.50) 0%, rgba(0,0,0,0.00) 13%);
+}
+
+/* ===== GENERAL PAGE STYLES ===== */
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #0f0f0f;
+  font-family: var(--section-title-font);
+  background: var(--bg-main);
   color: #e0e0e0;
+  margin: 0; padding: 0;
 }
 
 .container {
@@ -13,143 +33,178 @@ body {
   margin: 0 auto;
 }
 
-/* Header */
-header {
-  text-align: center;
-  background-color: #171717;
-  padding: 20px 0;
+/* ===== THREE COLUMN LAYOUT ===== */
+.three-column-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
 }
 
-header h1 {
-  color: #ffcc00;
-  margin: 0;
-  font-size: 2.5rem;
+.column {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevent overflow */
+}
+/* ===== SECTION STYLING ===== */
+/* ===== SPECIAL IMPORTANCE SECTION ===== */
+.special-importance .section-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
 }
 
-/* Section Styling */
-
-.collapsible .section-content.hidden {
-  display: none;
+/* ===== SECTION STYLING ===== */
+section {
+  background: var(--bg-section);
+  border-radius: var(--card-radius);
+  margin-bottom: 24px;
+  padding-bottom: 8px;
+  flex-shrink: 0;
 }
-
 .section-header {
   display: flex;
   align-items: center;
-  gap: 10px; /* Space between minimize button and title */
-  margin-bottom: 10px;
+  gap: var(--card-gap);
+  padding: var(--card-padding) var(--card-padding) 0 var(--card-padding);
 }
-
 .section-header h2 {
-  font-size: 0.9rem; /* Matches subheader style */
-  color: #cccccc; /* Light grey for subheaders */
+  color: var(--header-title);
+  font-family: var(--section-title-font);
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
   margin: 0;
   text-transform: uppercase;
+  line-height: normal;
+  font-style: normal;
 }
 
-/* adding timers */
-
+/* ===== TIMER ===== */
 .reset-timer {
-  font-size: x-small;
-  color: #29e05e;
+  color: var(--timer-color);
+  font-family: var(--section-title-font);
+  font-size: var(--section-title-size);
+  font-weight: var(--section-title-weight);
+  line-height: normal;
+  margin-left: auto;
   letter-spacing: 1px;
   min-width: 120px;
+  text-align: right;
 }
 
-.minimize-btn {
-  width: 20px;
-  height: 20px;
-  background-color: #292929;
-  color: #e0e0e0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: auto; /* Push the minimize button to the right */
-}
-
-/* Special Importance Section */
-.special-importance .section-content {
-  display: flex;
-  flex-wrap: wrap; /* Wrap cards to the next row */
-  gap: 20px; /* Spacing between cards */
-}
-
-/* Cards */
+/* ===== CARD COMPONENTS ===== */
 .card {
-  background-color: #1a1a1a;
-  border: 1px solid #292929;
-  border-radius: 8px;
-  padding: 15px;
-  width: 300px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: var(--card-width);
+  background: var(--bg-main);
+  border-radius: var(--card-radius);
+  margin-bottom: 18px;
+  box-shadow: 0px 1px 8px 0px rgba(0,0,0,0.10);
+  border: 1px solid #222;
 }
 
 .card-header {
   display: flex;
-  align-items: center;
-  justify-content: left;
-  position: relative;
+  align-items: flex-start;
+  gap: var(--card-gap);
+  padding: var(--card-padding);
+  align-self: stretch;
 }
-
 .card-header h3 {
-  font-size: 1.125rem; /* 2px larger than paragraph text */
-  color: #ff9900; /* Orange card titles */
+  font-size: 1.125rem;
+  color: var(--card-title);
   margin: 0;
-}
-
-.card-content.hidden {
-  display: none;
-}
-
-.card.checked-off {
-  opacity: 0.5; /* Reduce opacity for checked-off tasks */
+  font-weight: 500;
+  line-height: 1.2;
+  font-family: var(--section-title-font);
 }
 
 .check-off {
-  width: 20px;
-  height: 20px;
-  background-color: #555555; /* Medium grey */
-  border: 1px solid #ffffff; /* White outline */
-  border-radius: 4px; /* Rounded corners */
-  /* Remove these lines: */
-  /* position: absolute;
-  top: 0px; 
-  right: 0px; */
+  width: 20px; height: 20px;
+  background: #555; border: 1px solid #fff; border-radius: 4px;
+  cursor: pointer; appearance: none; margin-right: 2px;
+}
+
+.check-off:checked { background: #00cc66; border-color: #00ff99; }
+
+.card.checked-off { opacity: 0.5; }
+
+/* ===== CARD SUMMARY (Figma-Style) ===== */
+.card-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  width: 100%;
+  background: var(--light-shadow);
+  border-radius: 0 0 var(--card-radius) var(--card-radius);
+}
+
+.card-summary-row {
+  display: flex;
+  height: 49px;
+  padding: var(--card-padding);
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  width: 100%;
+}
+
+.card-summary-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.summary-est-time, .summary-reward {
+  display: flex; align-items: center;
+}
+.icon-timer, .icon-diamond {
+  display: flex; align-items: center; margin-right: 4px;
+}
+.summary-est-value {
+  font-weight: 500;
+  color: var(--header-title);
+  font-size: 13px;
+}
+.summary-reward-value {
+  font-weight: 500;
+  margin-left: 2px;
+  color: var(--reward-color);
+  max-width: 110px;
+  overflow: hidden; text-overflow: ellipsis;
+  white-space: nowrap; display: inline-block;
+}
+
+.summary-spacer { flex: 1 1 auto; }
+
+.card-summary .minimize-btn {
+  background: none; border: none;
+  color: #ffcc00;
+  font-size: 1.5em;
   cursor: pointer;
-  appearance: none; /* Remove default browser styling */
-  margin-right: 10px; /* Add some spacing between checkbox and title */
+  padding: 2px 8px;
+  align-self: flex-end;
 }
+.card-summary .minimize-btn:focus { outline: 2px solid #ffcc00; }
+.card-summary svg { vertical-align: middle; fill: none; stroke: var(--reward-color); }
+.card-summary:hover { background: #202021; }
 
-.check-off:checked {
-  background-color: #00cc66; /* Green background when checked */
-  border-color: #00ff99; /* Light green border when checked */
-}
-
-/* Three-Column Layout */
-.three-column-layout {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-/* mission card styling */
-
+/* ===== MISSION CARD ===== */
 .mission-card {
-  background: #000000;
+  background: #000;
   margin: 10px 0;
   font-size: smaller;
-  color: #e0e0e0;;        
+  color: #e0e0e0;
   padding: 10px;
   border-left: 4px solid #888;
   border-radius: 4px;
 }
-.mission-card h4 {
-  color: #fff;
-  margin: 0 0 5px 0;
-  border-radius: 2px;
-  font-size: 16px;
-}
-.mission-card p {
- margin: 6px 0;         /* reduce vertical spacing */
-}
+.mission-card h4 { color: #fff; margin: 0 0 5px 0; font-size: 16px; }
+.mission-card p { margin: 6px 0; }
 
-
+/* ===== END ===== */

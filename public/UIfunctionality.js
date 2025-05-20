@@ -5,6 +5,16 @@ function minimizeClicked(btn) {
   if (content) {
     const willBeHidden = !content.classList.contains('hidden');
     minimizeAction(parent, willBeHidden);
+
+    // Save open/closed state (open = !willBeHidden)
+    const card = btn.closest('.card');
+    if (card) {
+      const checkbox = card.querySelector('.check-off');
+      const taskId = checkbox && checkbox.getAttribute('data-task-id');
+      if (taskId) {
+        saveCardState(taskId, { open: !willBeHidden });
+      }
+    }
   }
 }
 
@@ -15,7 +25,10 @@ function checkboxClicked(checkbox) {
 
   card.classList.toggle('checked-off', checkbox.checked);
   minimizeAction(card, checkbox.checked);
-  saveCardCheckedState(taskId, checkbox.checked);
+
+  // Save checked/done state
+  saveCardState(taskId, { checked: checkbox.checked });
+
   reorderCardsInSection(card.parentElement);
 }
 
@@ -35,22 +48,28 @@ function minimizeAction(cardOrParent, shouldMinimize) {
 }
 
 // --- Data helpers ---
-function saveCardCheckedState(taskId, checked) {
-  const checkedState = JSON.parse(localStorage.getItem('checkedOffTasks') || '{}');
-  checkedState[taskId] = checked;
-  localStorage.setItem('checkedOffTasks', JSON.stringify(checkedState));
+function saveCardState(taskId, { checked = undefined, open = undefined } = {}) {
+  const state = JSON.parse(localStorage.getItem('cardStates') || '{}');
+  if (!state[taskId]) state[taskId] = {};
+  if (checked !== undefined) state[taskId].checked = checked;
+  if (open !== undefined) state[taskId].open = open;
+  localStorage.setItem('cardStates', JSON.stringify(state));
 }
-// -- Restore Checkboxes to where they were on last visit ---
-function restoreAllCardCheckedStates() {
-  const checkedState = JSON.parse(localStorage.getItem('checkedOffTasks') || '{}');
+
+// -- Restore Checkboxes and open state to where they were on last visit ---
+function restoreAllCardStates() {
+  const state = JSON.parse(localStorage.getItem('cardStates') || '{}');
   document.querySelectorAll('.check-off').forEach(checkbox => {
     const card = checkbox.closest('.card');
     const taskId = checkbox.getAttribute('data-task-id');
     if (!card || !taskId) return;
-    const checked = !!checkedState[taskId];
-    checkbox.checked = checked;
-    card.classList.toggle('checked-off', checked);
-    minimizeAction(card, checked);
+    const cardState = state[taskId] || {};
+    // Checked state
+    checkbox.checked = !!cardState.checked;
+    card.classList.toggle('checked-off', !!cardState.checked);
+    // Open/close state
+    const isOpen = cardState.open !== undefined ? cardState.open : false;
+    minimizeAction(card, !isOpen);
   });
 }
 
@@ -70,42 +89,45 @@ export function setupUIFunctionality() {
     btn.addEventListener('click', () => minimizeClicked(btn));
   });
 
-  // Add Checkbox Listeners (NO restore logic here)
+  // Add Checkbox Listeners
   document.querySelectorAll('.check-off').forEach(checkbox => {
     checkbox.addEventListener('change', () => checkboxClicked(checkbox));
   });
 
-  // Restore state separately, if desired
-  restoreAllCardCheckedStates();
+  // Restore state
+  restoreAllCardStates();
   reorderCardsInSection(document.getElementById("weekly-tasks-cards"));
   reorderCardsInSection(document.getElementById("daily-tasks-cards"));
 }
 
-
-// Utility to reset checked-off state for all cards in a section
+// Utility to reset checked-off and open state for all cards in a section
 function clearCheckedOffTasksForSection(sectionCardsContainerId) {
-  // Get all checkboxes in this section
   const cardsSection = document.getElementById(sectionCardsContainerId);
   if (!cardsSection) return;
 
   const checkboxes = cardsSection.querySelectorAll('.check-off');
-  const checkedState = JSON.parse(localStorage.getItem('checkedOffTasks') || '{}');
+  const cardStates = JSON.parse(localStorage.getItem('cardStates') || '{}');
   let changed = false;
 
   checkboxes.forEach(checkbox => {
     const taskId = checkbox.getAttribute('data-task-id');
-    if (taskId && checkedState[taskId] !== undefined) {
-      delete checkedState[taskId];
+    if (!taskId) return;
+
+    // Reset checked and open state
+    if (!cardStates[taskId]) cardStates[taskId] = {};
+    if (cardStates[taskId].checked !== false || cardStates[taskId].open !== false) {
+      cardStates[taskId].checked = false;
+      cardStates[taskId].open = false;
       changed = true;
     }
   });
 
   if (changed) {
-    localStorage.setItem('checkedOffTasks', JSON.stringify(checkedState));
+    localStorage.setItem('cardStates', JSON.stringify(cardStates));
   }
 
   // Update UI
-  restoreAllCardCheckedStates();
+  restoreAllCardStates();
   reorderCardsInSection(cardsSection);
 }
 

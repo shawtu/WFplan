@@ -7,21 +7,21 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
-  <div class="container">
-    <h1>
-      Warframe Planning Dashboard
-      <button id="clear-daily" style="margin-left:12px;">Daily</button>
-      <button id="clear-weekly" style="margin-left:6px;">Weekly</button>
-    </h1>
-  </div>
-</header>
+  <header>
+    <div class="container">
+      <h1>
+        Warframe Planning Dashboard
+        <button id="clear-daily" style="margin-left:12px;">Daily</button>
+        <button id="clear-weekly" style="margin-left:6px;">Weekly</button>
+      </h1>
+    </div>
+  </header>
 
   <main class="dashboard container">
     <!-- Special Importance Section -->
     <section class="special-importance collapsible">
       <div class="section-header">
-        <button class="minimize-btn">-</button>
+        <button class="minimize-btn" aria-label="Minimize section">-</button>
         <h2 class="subheader">SPECIAL IMPORTANCE</h2>
       </div>
       <div class="section-content" id="special-importance-cards"></div>
@@ -30,29 +30,29 @@
     <!-- Three-Column Layout -->
     <section class="three-column-layout">
       <!-- Column 1: Weekly Tasks -->
-<div class="column collapsible">
-  <div class="section-header">
-    <button class="minimize-btn">-</button>
-    <h2 class="subheader">WEEKLY TASKS</h2>
-    <div class="reset-timer" id="weekly-reset-timer"></div>
-  </div>
-  <div class="section-content" id="weekly-tasks-cards"></div>
-</div>
+      <div class="column collapsible">
+        <div class="section-header">
+          <button class="minimize-btn" aria-label="Minimize section">-</button>
+          <h2 class="subheader">WEEKLY TASKS</h2>
+          <div class="reset-timer" id="weekly-reset-timer"></div>
+        </div>
+        <div class="section-content" id="weekly-tasks-cards"></div>
+      </div>
 
-<!-- Column 2: Daily Tasks -->
-<div class="column collapsible">
-  <div class="section-header">
-    <button class="minimize-btn">-</button>
-    <h2 class="subheader">DAILY TASKS</h2>
-    <div class="reset-timer" id="daily-reset-timer"></div>
-  </div>
-  <div class="section-content" id="daily-tasks-cards"></div>
-</div>
+      <!-- Column 2: Daily Tasks -->
+      <div class="column collapsible">
+        <div class="section-header">
+          <button class="minimize-btn" aria-label="Minimize section">-</button>
+          <h2 class="subheader">DAILY TASKS</h2>
+          <div class="reset-timer" id="daily-reset-timer"></div>
+        </div>
+        <div class="section-content" id="daily-tasks-cards"></div>
+      </div>
 
       <!-- Column 3: Time-Sensitive Activities -->
       <div class="column collapsible">
         <div class="section-header">
-          <button class="minimize-btn">-</button>
+          <button class="minimize-btn" aria-label="Minimize section">-</button>
           <h2 class="subheader">TIME-SENSITIVE ACTIVITIES</h2>
         </div>
         <div class="section-content" id="time-sensitive-cards"></div>
