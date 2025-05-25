@@ -7,7 +7,6 @@
   --card-title: #FF9900;
   --reward-color: #b3e6ff;
   --card-radius: 12px;
-  --card-width: 328px;
   --card-gap: 12px;
   --card-padding: 12px;
   --section-title-font: 'Inter', 'Roboto', sans-serif;
@@ -24,7 +23,8 @@ body {
   font-family: var(--section-title-font);
   background: var(--bg-main);
   color: #e0e0e0;
-  margin: 0; padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
@@ -38,36 +38,29 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  padding: 12px 24px;
   margin-bottom: 32px;
 }
 
 .column {
   display: flex;
   flex-direction: column;
-  min-width: 0; /* Prevent overflow */
-}
-/* ===== SECTION STYLING ===== */
-/* ===== SPECIAL IMPORTANCE SECTION ===== */
-.special-importance .section-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 24px;
-  align-items: flex-start;
+  min-width: 0;
 }
 
 /* ===== SECTION STYLING ===== */
 section {
   background: var(--bg-section);
-  border-radius: var(--card-radius);
   margin-bottom: 24px;
   padding-bottom: 8px;
   flex-shrink: 0;
 }
+
 .section-header {
   display: flex;
   align-items: center;
   gap: var(--card-gap);
-  padding: var(--card-padding) var(--card-padding) 0 var(--card-padding);
+  padding: 12px 4px 12px;
 }
 .section-header h2 {
   color: var(--header-title);
@@ -98,7 +91,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: var(--card-width);
+  width: 100%;
   background: var(--bg-main);
   border-radius: var(--card-radius);
   margin-bottom: 18px;
@@ -113,6 +106,7 @@ section {
   padding: var(--card-padding);
   align-self: stretch;
 }
+
 .card-header h3 {
   font-size: 1.125rem;
   color: var(--card-title);
@@ -122,77 +116,108 @@ section {
   font-family: var(--section-title-font);
 }
 
+.custom-checkbox {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
 .check-off {
-  width: 20px; height: 20px;
-  background: #555; border: 1px solid #fff; border-radius: 4px;
-  cursor: pointer; appearance: none; margin-right: 2px;
+  opacity: 0;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  cursor: pointer;
 }
 
-.check-off:checked { background: #00cc66; border-color: #00ff99; }
+.checkbox-icon {
+  width: 18px;
+  height: 20px;
+  display: inline-block;
+  pointer-events: none;
+  /* The icon will be set by JS */
+}
 
-.card.checked-off { opacity: 0.5; }
+.card.checked-off {
+  opacity: 0.5;
+}
 
-/* ===== CARD SUMMARY (Figma-Style) ===== */
-.card-summary {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  align-self: stretch;
-  width: 100%;
+/* ===== CARD DETAILS CONTAINER ===== */
+.card-details {
   background: var(--light-shadow);
-  border-radius: 0 0 var(--card-radius) var(--card-radius);
-}
-
-.card-summary-row {
-  display: flex;
-  height: 49px;
-  padding: var(--card-padding);
-  justify-content: space-between;
-  align-items: center;
-  align-self: stretch;
+  padding: 16px;
   width: 100%;
+  box-sizing: border-box;
+  position: relative;
 }
 
-.card-summary-main {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-
-.summary-est-time, .summary-reward {
-  display: flex; align-items: center;
-}
-.icon-timer, .icon-diamond {
-  display: flex; align-items: center; margin-right: 4px;
-}
-.summary-est-value {
-  font-weight: 500;
-  color: var(--header-title);
-  font-size: 13px;
-}
-.summary-reward-value {
-  font-weight: 500;
-  margin-left: 2px;
-  color: var(--reward-color);
-  max-width: 110px;
-  overflow: hidden; text-overflow: ellipsis;
-  white-space: nowrap; display: inline-block;
-}
-
-.summary-spacer { flex: 1 1 auto; }
-
-.card-summary .minimize-btn {
-  background: none; border: none;
+/* ===== MINIMIZE BUTTON ===== */
+.minimize-btn {
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  z-index: 1;
+  background: none;
+  border: none;
   color: #ffcc00;
   font-size: 1.5em;
   cursor: pointer;
   padding: 2px 8px;
-  align-self: flex-end;
 }
-.card-summary .minimize-btn:focus { outline: 2px solid #ffcc00; }
-.card-summary svg { vertical-align: middle; fill: none; stroke: var(--reward-color); }
-.card-summary:hover { background: #202021; }
+.minimize-btn:focus {
+  outline: 2px solid #ffcc00;
+}
+
+/* ===== CARD SUMMARY ROW ===== */
+.card-summary {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0;
+  background: none;
+}
+
+.icon-timer,
+.icon-diamond {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+  color: var(--header-title);
+}
+
+.summary-est-value {
+  font-weight: 500;
+  color: var(--header-title);
+  font-size: 13px;
+  white-space: nowrap;
+  margin-right: 16px;
+}
+
+.summary-reward-value {
+  flex: 1 1 0;
+  min-width: 0;
+  font-weight: 500;
+  color: var(--header-title);
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  margin-right: 38px;
+}
+
+/* ===== CARD CONTENT ===== */
+.card-content {
+  background: none;
+  padding-top: 12px;
+}
+.card-content.hidden,
+.card-summary.hidden {
+  display: none;
+}
 
 /* ===== MISSION CARD ===== */
 .mission-card {
@@ -204,7 +229,19 @@ section {
   border-left: 4px solid #888;
   border-radius: 4px;
 }
-.mission-card h4 { color: #fff; margin: 0 0 5px 0; font-size: 16px; }
-.mission-card p { margin: 6px 0; }
+.mission-card h4 {
+  color: #fff;
+  margin: 0 0 5px 0;
+  font-size: 16px;
+}
+.mission-card p {
+  margin: 6px 0;
+}
 
-/* ===== END ===== */
+/* ===== SPECIAL IMPORTANCE SECTION ===== */
+.special-importance .section-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  align-items: flex-start;
+}

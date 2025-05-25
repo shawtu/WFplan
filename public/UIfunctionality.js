@@ -33,17 +33,29 @@ function checkboxClicked(checkbox) {
 }
 
 // --- Visual helpers ---
-function minimizeAction(cardOrParent, shouldMinimize) {
-  const content = cardOrParent.querySelector('.section-content, .card-content');
-  const minimizeBtn = cardOrParent.querySelector('.minimize-btn');
-  if (content) {
-    if (shouldMinimize) {
-      content.classList.add('hidden');
-      if (minimizeBtn) minimizeBtn.textContent = '+';
-    } else {
-      content.classList.remove('hidden');
-      if (minimizeBtn) minimizeBtn.textContent = '-';
-    }
+function findCardRoot(element) {
+  while (element && (!element.classList || !element.classList.contains('card') || !element.id)) {
+    element = element.parentElement;
+  }
+  return element;
+}
+
+function minimizeAction(childElement, shouldMinimize) {
+  const card = findCardRoot(childElement);
+  if (!card) return;
+
+  const cardSummary = card.querySelector('.card-summary');
+  const cardContent = card.querySelector('.card-content');
+  const minimizeBtn = card.querySelector('.minimize-btn');
+
+  if (shouldMinimize) {
+    if (cardSummary) cardSummary.classList.remove('hidden');
+    if (cardContent) cardContent.classList.add('hidden');
+    if (minimizeBtn) minimizeBtn.textContent = '+';
+  } else {
+    if (cardSummary) cardSummary.classList.add('hidden');
+    if (cardContent) cardContent.classList.remove('hidden');
+    if (minimizeBtn) minimizeBtn.textContent = '-';
   }
 }
 

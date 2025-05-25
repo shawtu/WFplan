@@ -2,6 +2,7 @@ import { buildCardData } from './cardDataBuilder.js';
 import { renderCards } from './cards.js';
 import { setupUIFunctionality } from './UIfunctionality.js';
 import { startResetTimers } from './resetTimers.js';
+import { setupCheckboxIcons } from './checkboxIcons.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
   const cardData = await buildCardData();
@@ -10,6 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   renderCards(cardData.dailyTasks, "daily-tasks-cards");
   renderCards(cardData.timeSensitive, "time-sensitive-cards");
   setupUIFunctionality();
+  setupCheckboxIcons();
   startResetTimers();
 
 });
